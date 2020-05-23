@@ -1,0 +1,2 @@
+docker/mysql/initdb.d/*.*
+log/mysql/mysqld.log

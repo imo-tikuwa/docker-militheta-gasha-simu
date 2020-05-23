@@ -1,0 +1,28 @@
+version: '3.3'
+
+services:
+    php:
+        build: ./docker/php73
+        volumes:
+            - ./docker/php73/php.ini:/usr/local/etc/php/php.ini
+            - ./docker/php73/apache.conf:/etc/apache2/conf-enabled/apache.conf
+            - ./militheta-gasha-simu:/usr/local/militheta-gasha-simu
+        ports:
+            - 80:80
+        links:
+            - mysql:mysql
+    mysql:
+        build: ./docker/mysql
+        image: mysql:5.7
+        restart: always
+        volumes:
+            - ./docker/mysql/initdb.d:/docker-entrypoint-initdb.d
+            - ./docker/mysql/conf.d:/etc/mysql/conf.d
+            - ./log/mysql:/var/log/mysql
+        ports:
+            - "43306:3306"
+        environment:
+            MYSQL_DATABASE: millitheta
+            MYSQL_USER: millitheta
+            MYSQL_PASSWORD: 92xUCSRgoBqZ0qyB
+            MYSQL_ROOT_PASSWORD: root

@@ -1,0 +1,4 @@
+[submodule "militheta-gasha-simu"]
+	path = militheta-gasha-simu
+	url = https://github.com/imo-tikuwa/militheta-gasha-simu.git
+	ignore = dirty
