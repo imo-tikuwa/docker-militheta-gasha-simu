@@ -1,2 +1,3 @@
 docker/mysql/initdb.d/*.*
 log/mysql/mysqld.log
+militheta-gasha-simu/*

@@ -20,9 +20,12 @@ RUN curl -sL https://deb.nodesource.com/setup_11.x | bash -
 RUN apt-get install -y nodejs
 # RUN npm install npm@latest -g
 
-# apacheのドキュメントルート変更
-# https://stackoverflow.com/questions/51393494/how-to-change-the-document-root-in-php7-1-apache-from-docker-compose-yml
-# ローカル側(docker/php73)に000-default.confを用意して/etc/apache2/sites-availableにマウントする形でも良いかもしれない？
-ENV APACHE_DOCUMENT_ROOT=/usr/local/militheta-gasha-simu/cake_app/webroot
-RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
-RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
+# mod_rewrite有効化
+RUN a2enmod rewrite
+
+# アプリケーションのセットアップ(composer、npm)
+# WORKDIR /usr/local/militheta-gasha-simu/cake_app
+# RUN composer install --no-dev --no-interaction
+# RUN bin/cake plugin unload Cake3AdminBaker
+# RUN npm install
+# RUN npm run build

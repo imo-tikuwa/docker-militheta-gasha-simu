@@ -5,7 +5,7 @@ services:
         build: ./docker/php73
         volumes:
             - ./docker/php73/php.ini:/usr/local/etc/php/php.ini
-            - ./docker/php73/apache.conf:/etc/apache2/conf-enabled/apache.conf
+            - ./docker/php73/000-default.conf:/etc/apache2/sites-available/000-default.conf
             - ./militheta-gasha-simu:/usr/local/militheta-gasha-simu
         ports:
             - 80:80
