@@ -7,6 +7,7 @@ services:
             - ./docker/php73/php.ini:/usr/local/etc/php/php.ini
             - ./docker/php73/000-default.conf:/etc/apache2/sites-available/000-default.conf
             - ./militheta-gasha-simu:/usr/local/militheta-gasha-simu
+            - ./docker/php73/.env:/usr/local/militheta-gasha-simu/cake_app/config/.env
         ports:
             - 80:80
         links:
