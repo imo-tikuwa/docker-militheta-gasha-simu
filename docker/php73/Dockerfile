@@ -23,9 +23,5 @@ RUN apt-get install -y nodejs
 # mod_rewrite有効化
 RUN a2enmod rewrite
 
-# アプリケーションのセットアップ(composer、npm)
-# WORKDIR /usr/local/militheta-gasha-simu/cake_app
-# RUN composer install --no-dev --no-interaction
-# RUN bin/cake plugin unload Cake3AdminBaker
-# RUN npm install
-# RUN npm run build
+# コンテナ内に初回セットアップスクリプトをコピー
+COPY init-script.sh /tmp/
