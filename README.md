@@ -27,16 +27,9 @@ docker-compose build --no-cache
 docker-compose up -d
 ```
 
----
-アプリケーションの設定と確認  
+アプリケーションの初回セットアップ  
 ```
-docker-compose exec php bash
-
-cd /usr/local/militheta-gasha-simu/cake_app
-composer install --no-dev --no-interaction
-bin/cake plugin unload Cake3AdminBaker
-bin/cake init_operation_logs
-npm run build
+docker-compose exec php /tmp/init-script.sh
 ```
 
 ---
