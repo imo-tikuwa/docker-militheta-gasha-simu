@@ -4,15 +4,10 @@
 [militheta-gasha-simu](https://github.com/imo-tikuwa/militheta-gasha-simu)の環境構築をdockerを使って行うことを目的とした勉強用リポジトリです
 
 ## インストール手順
-当リポジトリをクローン
+リポジトリをクローン(サブモジュール含む)
 ```
-git clone https://github.com/imo-tikuwa/docker-militheta-gasha-simu.git
+git clone --recursive https://github.com/imo-tikuwa/docker-militheta-gasha-simu.git
 cd docker-militheta-gasha-simu
-```
-
-アプリケーション本体をクローン
-```
-git clone https://github.com/imo-tikuwa/militheta-gasha-simu.git
 ```
 
 アプリケーション本体以下の初期データSQLをコピー
