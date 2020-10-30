@@ -1,13 +1,23 @@
 version: '3.3'
 
+# node_modules、vendorはトップレベルボリュームを利用することでコンテナ内のインストール処理が速くなる
+# ビルトインサーバーを起動しての開発を行う場合は以下のトップレベルボリュームの記述とphpコンテナ内のマウントの記述をコメントアウトすること
+# ※vendorはボリューム化するとホストPCからボリューム内が参照できないことに起因してビルトインサーバーでは正常に動作しない。開発する際はコメントアウトしておく必要あり
+volumes:
+    node_modules_volume:
+    # vendor_volume:
+
 services:
     php:
         build: ./docker/php73
+        env_file: docker.env
         volumes:
-            - ./docker/php73/php.ini:/usr/local/etc/php/php.ini
+            - ./docker/php73/my-override.ini:/usr/local/etc/php/conf.d/my-override.ini
             - ./docker/php73/000-default.conf:/etc/apache2/sites-available/000-default.conf
             - ./militheta-gasha-simu:/usr/local/militheta-gasha-simu
-            - ./docker/php73/.env:/usr/local/militheta-gasha-simu/cake_app/config/.env
+            - ./log/apache2:/var/log/apache2
+            - node_modules_volume:/usr/local/militheta-gasha-simu/cake_app/node_modules
+            # - vendor_volume:/usr/local/militheta-gasha-simu/cake_app/vendor
         ports:
             - 80:80
         links:
@@ -15,15 +25,12 @@ services:
     mysql:
         build: ./docker/mysql
         image: mysql:5.7
+        env_file: docker.env
         restart: always
         volumes:
-            - ./docker/mysql/initdb.d:/docker-entrypoint-initdb.d
+            - ./db-data:/var/lib/mysql
             - ./docker/mysql/conf.d:/etc/mysql/conf.d
             - ./log/mysql:/var/log/mysql
+            - ./docker/mysql/initdb.d:/docker-entrypoint-initdb.d
         ports:
             - "43306:3306"
-        environment:
-            MYSQL_DATABASE: millitheta
-            MYSQL_USER: millitheta
-            MYSQL_PASSWORD: 92xUCSRgoBqZ0qyB
-            MYSQL_ROOT_PASSWORD: root

@@ -1,2 +1,3 @@
-docker/mysql/initdb.d/*.*
+db-data/*
 log/mysql/mysqld.log
+log/apache2/*
