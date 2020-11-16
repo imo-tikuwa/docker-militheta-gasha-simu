@@ -9,9 +9,9 @@ RUN apt-get update \
     # fileinfo → intervention/imageで必須
     && docker-php-ext-install pdo_mysql mysqli mbstring fileinfo intl zip xml
 
-# composerインストール
-# https://qiita.com/yatsubashi/items/02bbbebbfe7e5a5976bc
+# composer2インストール
 COPY --from=composer /usr/bin/composer /usr/bin/composer
+RUN /usr/bin/composer self-update --2
 
 # nodejs,npmインストール
 # https://tsyama.hatenablog.com/entry/docker-not-found-npm
