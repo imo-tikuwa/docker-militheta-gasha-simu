@@ -10,12 +10,6 @@ git clone --recursive https://github.com/imo-tikuwa/docker-militheta-gasha-simu.
 cd docker-militheta-gasha-simu
 ```
 
-アプリケーション本体以下の初期データSQLをコピー
-```
-cp militheta-gasha-simu/env/create_millitheta.sql docker/mysql/initdb.d/01_create_millitheta.sql
-cp militheta-gasha-simu/env/millitheta.sql docker/mysql/initdb.d/02_millitheta.sql
-```
-
 docker-compose.ymlに基づきphp(apache)、mysqlコンテナをビルド
 ```
 docker-compose build --no-cache
